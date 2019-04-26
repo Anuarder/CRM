@@ -1,0 +1,14 @@
+.navigation{
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+}
+.navigation-logo{
+    display: flex;
+    align-items: center;
+}
+.navigation-logo h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 20px;
+}
