@@ -40,7 +40,8 @@ module.exports = {
                     phone: req.body.phone,
                     date: `${filterDate.day}.${filterDate.mounth}.${filterDate.year}`,
                     status: false,
-                    personal: ''
+                    personal: '',
+                    comment: ''
                 });
 
                 await newRequest.save();
