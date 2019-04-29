@@ -27,10 +27,17 @@
                     </option>
                 </select>
             </div>
-            <div class="comment" v-if="request.status">
-                <span class="mr-2 font-weight-regular">Коментарий:</span>
-                <!-- //TODO: Добавить возможность добавлять коментарии -->
-                <!-- {{item.comment}} -->
+            <div class="comment">
+                <div class="comment-container">
+                    <div class="font-weight-regular">
+                        Коментарий:
+                    </div>
+                    <v-textarea
+                        solo
+                        placeholder="Оставить коментарии" 
+                        v-model="request.comment">
+                    </v-textarea>
+                </div>
             </div>
             <div class="actions mt-2">
                 <v-btn 
@@ -60,7 +67,8 @@ export default {
     },
     data(){
         return {
-            personal: []
+            personal: [],
+            editCommentDialog: false,
         }
     },
     created(){
@@ -95,20 +103,29 @@ export default {
                 if(this.request.personal === '' && !this.request.status){
                     alert('Добавьте сотрудника');
                 }else{
-                    let response = await RequestServices.changeRequestStatus({
-                        id: this.request._id,
-                        personal: this.request.personal,
-                        status: !this.request.status
-                    });
-                    if(response.data.message){
-                        if(!this.request.status){
-                            alert('Заявка обработанна');
-                        }else{
-                            alert('Обработка отмененна');
-                        }
-                        this.$emit('updateRequest');
+                    if(this.editCommentDialog == false){
+                        this.editCommentDialog = true
                     }else{
-                        alert('Ошибка');
+                        if(!this.request.status === false){
+                            this.request.personal = '';
+                            this.request.comment = '';
+                        }
+                        let response = await RequestServices.changeRequestStatus({
+                            id: this.request._id,
+                            personal: this.request.personal,
+                            status: !this.request.status,
+                            comment: this.request.comment
+                        });
+                        if(response.data.message){
+                            if(!this.request.status){
+                                alert('Заявка обработанна');
+                            }else{
+                                alert('Обработка отмененна');
+                            }
+                            this.$emit('updateRequest');
+                        }else{
+                            alert('Ошибка');
+                        }
                     }
                 }
             }catch(err){
@@ -159,5 +176,12 @@ a{
     max-width: 300px;
     border: 1px solid #252525;
     padding: 5px;
+}
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left;
 }
 </style>

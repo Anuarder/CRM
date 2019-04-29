@@ -5,15 +5,15 @@
                 <h1 class="display-2">Загрузка...</h1>
             </div>
             <div v-else>
-                <v-btn 
-                    @click="uploadToExcel" 
-                    class="text-none ma-0 mb-3 ml-3" 
-                    color="#2896FF" 
-                    dark
-                    :loading="excelState">
-                    Выгрузить в Excel
-                </v-btn>
                 <div v-if="requests.length !== 0">
+                    <v-btn 
+                        @click="uploadToExcel" 
+                        class="text-none ma-0 mb-3 ml-3" 
+                        color="#2896FF" 
+                        dark
+                        :loading="excelState">
+                        Выгрузить в Excel
+                    </v-btn>
                     <request-card 
                         class="mt-4"
                         v-for="request in requests"
@@ -60,13 +60,6 @@ export default {
         },
         uploadToExcel(){
             this.excelState = true;
-            const a = {
-                date: "28.04.2019",
-                name: "Талгат",
-                personal: "Маша",
-                phone: "77022209722",
-                status: true
-            }
             let config = {
                 filename: 'Заявки',
                 sheet: {
