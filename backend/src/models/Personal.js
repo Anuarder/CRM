@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const personalSchema = new Schema(
     {
         name: String,
-        phone: String
+        phone: String,
     },
     {
         collection: "personal"
