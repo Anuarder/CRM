@@ -27,17 +27,21 @@
                     </option>
                 </select>
             </div>
-            <div class="comment">
+            <div class="comment" v-if="request.comment && request.status || !request.status">
+                <span class="font-weight-regular w-100">
+                    Коментарий:
+                </span>
                 <div class="comment-container">
-                    <div class="font-weight-regular">
-                        Коментарий:
+                    <div v-if="!request.status">
+                        <textarea 
+                            class="comment-text-area"
+                            placeholder="Оставить коментарии" 
+                            v-model="request.comment"></textarea>
                     </div>
-                    <v-textarea
-                        solo
-                        placeholder="Оставить коментарии" 
-                        v-model="request.comment">
-                    </v-textarea>
-                </div>
+                    <div v-else class="comment-text">
+                        {{request.comment}}
+                    </div>  
+                </div>  
             </div>
             <div class="actions mt-2">
                 <v-btn 
@@ -174,14 +178,23 @@ a{
 .personal-select{
     cursor: pointer;
     max-width: 300px;
-    border: 1px solid #252525;
     padding: 5px;
 }
+.comment{
+    display: block !important;
+}
 .comment-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-    text-align: left;
+    padding-left: 0 !important;
+}
+.comment-text-area{
+    outline: none;
+    padding: 5px;
+    border: 1px solid rgba(2, 2, 2, 0.185);
+}
+.comment-text{
+    padding-left: 0 !important;
+    max-width: 400px;
+    color: #535353;
+    font-weight: 300;
 }
 </style>

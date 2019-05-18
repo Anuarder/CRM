@@ -14,7 +14,7 @@
                             </div>
                         </router-link>
                         <!-- https://mail.dreamcity.kz -->
-                        <a href="#">
+                        <a href="https://mail.google.com/mail/u/0/#inbox" target="blank">
                             <div class="card"> 
                                 <div>
                                     <img class="card-img" src="../assets/cards/mail.png">
